@@ -20,7 +20,8 @@ public class BankBranchCount {
     private String glb;
     @Column(name = "count", nullable = false)
     private int count;
-    @Column(name = "datetime", columnDefinition = "DATE DEFAULT (DATE_FORMAT(NOW(), '%Y-%m-%d'))")
+    //@Column(name = "datetime", columnDefinition = "DATE DEFAULT (DATE_FORMAT(NOW(), '%Y-%m-%d'))")
+    @Column(name = "datetime")
     private String datetime = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
     public BankBranchCount() {
