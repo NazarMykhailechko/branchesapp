@@ -21,8 +21,10 @@ public class BankBranchCount {
     @Column(name = "count", nullable = false)
     private int count;
     //@Column(name = "datetime", columnDefinition = "DATE DEFAULT (DATE_FORMAT(NOW(), '%Y-%m-%d'))")
-    @Column(name = "datetime")
-    private String datetime = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+    //@Column(name = "datetime")
+    //private String datetime = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+    @Column(name = "datetime", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private String datetime = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 
     public BankBranchCount() {
     }
