@@ -7,7 +7,7 @@
 <html>
 <head>
 
-    <title>Конкурс</title>
+    <title>Структурні підрозділи</title>
 
     <meta charset="utf-8" />
 
@@ -32,15 +32,15 @@
         }
         table {
             font-family: "Helvetica Neue", Helvetica, sans-serif;
-            width: 50%;
+            font-size: x-small;
+
         }
         th {
-            background: SteelBlue;
+            background:  crimson;
             color: white;
         }
         td,th{
             border: 1px solid gray;
-            width: 25%;
             text-align: left;
             padding: 5px 10px;
         }
@@ -148,23 +148,21 @@
 </div>
 <%--<h5 class="text">Created by Nazar Mykhailechko</h5>
 <br>--%>
-
+<h3 class="text">Динаміка структурних підрозділів банків України</h3>
 <c:if test="${!empty listOfVotes}">
     <table class="tg">
         <tr>
-            <th width="20">Id</th>
-            <th width="200">GLB</th>
-            <th width="200">Count</th>
-            <th width="800">Date</th>
-
+            <th width="20">GLB</th>
+            <th width="200">Назва банку</th>
+            <c:forEach items="${listOfFields}" var="fieldsList">
+                <th width="60">${fieldsList}</th>
+            </c:forEach>
         </tr>
-        <c:forEach items="${listOfVotes}" var="vote">
+        <c:forEach items="${listOfVotes}" var="objectList">
             <tr>
-                <td>${vote.id}</td>
-                <td>${vote.glb}</td>
-                <td>${vote.count}</td>
-                <td>${vote.datetime}</td>
-
+            <c:forEach items="${objectList}" var="object">
+                    <td>${object}</td>
+            </c:forEach>
             </tr>
         </c:forEach>
     </table>

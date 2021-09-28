@@ -47,12 +47,13 @@ public class BranchController {
     @RequestMapping("/")
     public String home(Model model) throws IOException {
 
-//        Query q1 = em.createNativeQuery("SELECT distinct datetime from bank_branches");
-//        List<Object[]> listOfFields = q1.getResultList();
+        Query fieldnames = em.createNativeQuery("SELECT distinct left(datetime,10) from bank_branches order by datetime desc");
+        List<Object[]> listOfFields = fieldnames.getResultList();
            //Query q = em.createNativeQuery("SELECT * from pivotdata");
-//           Query q = em.createNativeQuery("{call pivotdata()}");
-//
-//            List<Object[]> results = q.getResultList();
+           Query q = em.createNativeQuery("{call pivotdata()}");
+
+           List<Object[]> results = q.getResultList();
+
 //        for (Object[] result: results) {
 //            //String something = (String)result[1];
 //            if (result[1] instanceof BigDecimal)
@@ -97,7 +98,9 @@ public class BranchController {
 //            System.out.println(bankBranchCount);
 //        }
 
-        model.addAttribute("listOfVotes", branchDao.findAll());
+        //model.addAttribute("listOfVotes", branchDao.findAll());
+        model.addAttribute("listOfVotes", results);
+        model.addAttribute("listOfFields", listOfFields);
         //BankBranchCount bankBranchCount = new BankBranchCount();
         //model.addAttribute("voting", bankBranchCount);
 
