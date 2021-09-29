@@ -30,8 +30,8 @@ public class ShedulerService {
 
       @Async
       //@Scheduled(cron = "*/60 * * * * *")
-      @Scheduled(cron = "0 0 1 * * ?")
-      //@Scheduled(cron="0 0 1 1 * ?")
+      //@Scheduled(cron = "0 0 1 * * ?")
+      @Scheduled(cron="0 0 1 1 * ?")
     public void refreshData() throws IOException {
           URL url = new URL("https://bank.gov.ua/NBU_BankInfo/get_dptlist?json");
 
