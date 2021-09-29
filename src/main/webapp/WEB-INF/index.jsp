@@ -139,6 +139,23 @@
             display: none;
         }
 
+        .ok{
+            background:  green;
+        }
+
+        .right{
+            background:  black;
+        }
+
+        .minus{
+            background:  red;
+        }
+
+        .plus{
+            background:  green;
+        }
+
+
     </style>
 </head>
 <body>
@@ -149,11 +166,15 @@
 <%--<h5 class="text">Created by Nazar Mykhailechko</h5>
 <br>--%>
 <h3 class="text">Динаміка структурних підрозділів банків України</h3>
+
+<button onclick="incr()">green>></button>
+<button  onclick="decr()">black>></button>
 <c:if test="${!empty listOfVotes}">
-    <table class="tg">
+    <table id="branches" class="tg">
         <tr>
             <th width="20">GLB</th>
             <th width="200">Назва банку</th>
+            <th width="50">Приріст</th>
             <c:forEach items="${listOfFields}" var="fieldsList">
                 <th width="60">${fieldsList}</th>
             </c:forEach>
@@ -172,6 +193,93 @@
 
 <script language="javascript">
 
+            let incr = (function () {
+                let i = 3;
+
+                return function () {
+
+                    if(i < document.getElementById('branches').rows[0].cells.length){
+                        //console.log(document.getElementById('branches').rows[0].cells[i].innerHTML)
+
+                        document.getElementById('branches').rows[0].cells[i].classList.add("ok");
+                        document.getElementById('branches').rows[0].cells[i-1].classList.remove("ok");
+
+                        for (let z = 1; z < document.getElementById("branches").rows.length; z++) {
+                            document.getElementById('branches').rows[z].cells[2].classList.remove("minus");
+                            document.getElementById('branches').rows[z].cells[2].classList.remove("plus");
+
+                            document.getElementById('branches').rows[z].cells[2].innerHTML =
+                                document.getElementById('branches').rows[z].cells[document.getElementsByClassName("ok")[0].cellIndex].innerHTML - document.getElementById('branches').rows[z].cells[document.getElementsByClassName("right")[0].cellIndex].innerHTML;
+
+                            if(document.getElementById('branches').rows[z].cells[2].innerHTML < 0){
+                                document.getElementById('branches').rows[z].cells[2].classList.add("minus");
+                            }
+                            if(document.getElementById('branches').rows[z].cells[2].innerHTML > 0){
+                                document.getElementById('branches').rows[z].cells[2].classList.add("plus");
+                            }
+                        }
+
+                        i++;
+                        return i;
+                    }else{
+                        document.getElementById('branches').rows[0].cells[i-1].classList.remove("ok");
+                            i = 3;
+                        }
+               }
+            })();
+
+            let decr = (function () {
+                let i = 3;
+
+                return function () {
+
+                    if(i < document.getElementById('branches').rows[0].cells.length){
+                        //console.log(document.getElementById('branches').rows[0].cells[i].innerHTML)
+                        //console.log(i)
+                        document.getElementById('branches').rows[0].cells[i].classList.add("right");
+                        document.getElementById('branches').rows[0].cells[i-1].classList.remove("right");
+
+                        for (let z = 1; z < document.getElementById("branches").rows.length; z++) {
+                            document.getElementById('branches').rows[z].cells[2].classList.remove("minus");
+                            document.getElementById('branches').rows[z].cells[2].classList.remove("plus");
+
+                            document.getElementById('branches').rows[z].cells[2].innerHTML =
+                                document.getElementById('branches').rows[z].cells[document.getElementsByClassName("ok")[0].cellIndex].innerHTML - document.getElementById('branches').rows[z].cells[document.getElementsByClassName("right")[0].cellIndex].innerHTML;
+
+                            if(document.getElementById('branches').rows[z].cells[2].innerHTML < 0){
+                                document.getElementById('branches').rows[z].cells[2].classList.add("minus");
+                            }
+                            if(document.getElementById('branches').rows[z].cells[2].innerHTML > 0){
+                                document.getElementById('branches').rows[z].cells[2].classList.add("plus");
+                            }
+
+                        }
+
+                        i++;
+                        return i;
+                    }else{
+                        document.getElementById('branches').rows[0].cells[i-1].classList.remove("right");
+                        i = 3;
+                    }
+                }
+            })();
+
+    function tabledata() {
+        console.log(document.getElementById('branches').rows[0].cells.length)
+        let table = document.getElementById("branches");
+        let totalRowCount = table.rows.length; // 5
+        let tbodyRowCount = table.tBodies[0].rows.length; // 3
+        console.log(totalRowCount)
+        console.log(tbodyRowCount)
+        console.log(document.getElementById('branches').rows[4].cells[0].innerHTML)
+        console.log(document.getElementById('branches').rows[4].cells[1].innerHTML)
+        console.log(document.getElementById('branches').rows[4].cells[2].innerHTML)
+        console.log(document.getElementById('branches').rows[4].cells[3].innerHTML)
+        console.log(document.getElementById('branches').rows[4].cells[4].innerHTML)
+        console.log(document.getElementById('branches').rows[4].cells[2].innerHTML - document.getElementById('branches').rows[4].cells[3].innerHTML)
+    }
+
+    //tabledata()
 
     function JSGetSelectedItem() {
         let dropdownIndex = document.getElementById('sel').selectedIndex;
