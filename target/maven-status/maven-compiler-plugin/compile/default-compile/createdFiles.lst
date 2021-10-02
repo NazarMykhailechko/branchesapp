@@ -6,4 +6,3 @@ branchapp\dao\BranchDao.class
 TestBankBranch.class
 Item.class
 branchapp\model\BankBranchCount.class
-branchapp\Service\Scheduler.class
