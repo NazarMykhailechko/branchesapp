@@ -31,7 +31,8 @@ public class ShedulerService {
       @Async
       //@Scheduled(cron = "*/60 * * * * *")
       //@Scheduled(cron = "0 */15 * ? * *")
-      @Scheduled(cron = "0 0 1 * * ?")
+      @Scheduled(cron = "0 10 4 * * ?")
+      //@Scheduled(cron = "0 0 1 * * ?")
       //@Scheduled(cron="0 0 9 1 * ?")
 
     public void refreshData() throws IOException {
