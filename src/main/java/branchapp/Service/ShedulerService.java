@@ -79,7 +79,8 @@ public class ShedulerService {
           message.setTo(MyConstants.FRIEND_EMAIL);
           message.setCc("WIN72007@ukr.net");
           message.setSubject("Мережа");
-          message.setText("Кількість відділень банків України http://branchapp.herokuapp.com/");
+          message.setText("Кількість відділень банків України (по даним НБУ) " +
+                          "https://branchapp.herokuapp.com/");
           // Send Message!
           this.emailSender.send(message);
       }
