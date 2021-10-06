@@ -2,10 +2,13 @@ package branchapp.Service;
 
 
 import branchapp.dao.BranchDao;
+import branchapp.email.MyConstants;
 import branchapp.model.BankBranch;
 import branchapp.model.BankBranchCount;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -27,6 +30,9 @@ public class ShedulerService {
 
     @Autowired
     BranchDao branchDao;
+
+    @Autowired
+    public JavaMailSender emailSender;
 
       @Async
       //@Scheduled(cron = "*/60 * * * * *")
@@ -64,5 +70,17 @@ public class ShedulerService {
 
           BankBranchCount[] bbc = new Gson().fromJson(JSONdata, BankBranchCount[].class);
           branchDao.saveAll((Arrays.asList(bbc)));
+
+
+
+          // Create a Simple MailMessage.
+          SimpleMailMessage message = new SimpleMailMessage();
+
+          message.setTo(MyConstants.FRIEND_EMAIL);
+          message.setCc("WIN72007@ukr.net");
+          message.setSubject("Мережа");
+          message.setText("Кількість відділень банків України http://branchapp.herokuapp.com/");
+          // Send Message!
+          this.emailSender.send(message);
       }
     }

@@ -17,6 +17,7 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <encoding>Cp1252</encoding>
                 </configuration>
             </plugin>
             <plugin>
@@ -44,6 +45,13 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
             <version>2.2.5.RELEASE</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+            <version>2.3.4.RELEASE</version>
+        </dependency>
+
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>

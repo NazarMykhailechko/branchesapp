@@ -4,4 +4,6 @@ branchapp\model\BankBranch.class
 branchapp\SpringBootWebRun.class
 branchapp\dao\BranchDao.class
 TestBankBranch.class
+branchapp\email\MyConstants.class
 branchapp\model\BankBranchCount.class
+branchapp\email\MailConfig.class
