@@ -47,7 +47,7 @@ public class BranchController {
     @RequestMapping("/")
     public String home(Model model) throws IOException {
 
-        Query fieldnames = em.createNativeQuery("SELECT distinct left(datetime,10) from bank_branches order by datetime desc");
+        Query fieldnames = em.createNativeQuery("SELECT distinct left(datetime,10) from bank_branches order by datetime desc limit 12");
         List<Object[]> listOfFields = fieldnames.getResultList();
            //Query q = em.createNativeQuery("SELECT * from pivotdata");
            Query q = em.createNativeQuery("{call pivotdata()}");
