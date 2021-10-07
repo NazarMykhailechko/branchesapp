@@ -31,13 +31,13 @@ public class ShedulerService {
     @Autowired
     BranchDao branchDao;
 
-    @Autowired
-    public JavaMailSender emailSender;
+/*    @Autowired
+    public JavaMailSender emailSender;*/
 
       @Async
       //@Scheduled(cron = "*/60 * * * * *")
       //@Scheduled(cron = "0 */15 * ? * *")
-      @Scheduled(cron = "0 10 7 * * ?")
+      @Scheduled(cron = "0 10 8 * * ?")
       //@Scheduled(cron = "0 0 1 * * ?")
       //@Scheduled(cron="0 0 9 1 * ?")
 
@@ -73,7 +73,7 @@ public class ShedulerService {
 
 
 
-          // Create a Simple MailMessage.
+/*          // Create a Simple MailMessage.
           SimpleMailMessage message = new SimpleMailMessage();
 
           message.setTo(MyConstants.FRIEND_EMAIL);
@@ -82,6 +82,6 @@ public class ShedulerService {
           message.setText("Кількість відділень банків України (по даним НБУ) " +
                           "https://branchapp.herokuapp.com/");
           // Send Message!
-          this.emailSender.send(message);
+          this.emailSender.send(message);*/
       }
     }
