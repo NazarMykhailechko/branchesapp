@@ -34,7 +34,11 @@ public class BankBranch {
     }
 
     public String getDepcode() {
-        return depcode;
+        if(depcode != null) {
+            return depcode;
+        }else{
+            return "000";
+        }
     }
 
     public void setDepcode(String depcode) {
@@ -76,6 +80,6 @@ public class BankBranch {
     }
 
     public String getGLB (){
-        return getDepcode().substring(0,3);
+            return getDepcode().substring(0, 3);
     }
 }
