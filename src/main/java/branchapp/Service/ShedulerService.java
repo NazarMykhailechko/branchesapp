@@ -5,6 +5,7 @@ import branchapp.dao.BranchDao;
 import branchapp.email.MyConstants;
 import branchapp.model.BankBranch;
 import branchapp.model.BankBranchCount;
+import branchapp.model.BankBranches;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -42,20 +43,21 @@ public class ShedulerService {
       //@Scheduled(cron="0 0 9 1 * ?")
 
     public void refreshData() throws IOException {
-          URL url = new URL("https://bank.gov.ua/NBU_BankInfo/get_dptlist?json");
+          //URL url = new URL("https://bank.gov.ua/NBU_BankInfo/get_dptlist?json");
+          URL url = new URL("https://bank.gov.ua/NBU_BankInfo/get_data_branch?json");
 
           //InputStreamReader reader = new InputStreamReader(url.openStream());
           BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
           Gson gson = new Gson();
 
-          BankBranch[] dto1 = new Gson().fromJson(reader, BankBranch[].class);
+          BankBranches[] dto1 = new Gson().fromJson(reader, BankBranches[].class);
 
-          List<BankBranch> bankBranchList = Arrays.asList(dto1);
+          List<BankBranches> bankBranchList = Arrays.asList(dto1);
 
-          Map<String, Long> counting = bankBranchList.stream().filter(b -> b.getDepcode().startsWith("0", 8)
-                  || b.getDepcode().startsWith("1", 8)
-                  || b.getDepcode().startsWith("2", 8)).collect(
-                  Collectors.groupingBy(BankBranch::getGLB, Collectors.counting()));
+          Map<String, Long> counting = bankBranchList.stream().filter(b -> (b.getTyp().equals("0")
+                  || b.getTyp().equals("1")
+                  || b.getTyp().equals("2")) && !b.getTyp().equals("null")).collect(
+                  Collectors.groupingBy(BankBranches::getNkb, Collectors.counting()));
 
           StringBuilder sb = new StringBuilder();
 

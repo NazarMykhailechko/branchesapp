@@ -1,5 +1,6 @@
 branchapp\controller\BranchController.class
 branchapp\Service\ShedulerService.class
+branchapp\model\BankBranches.class
 branchapp\model\BankBranch.class
 branchapp\SpringBootWebRun.class
 branchapp\dao\BranchDao.class
